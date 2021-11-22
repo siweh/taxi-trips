@@ -91,18 +91,34 @@ describe('Taxi Trips', function () {
 
   it('find the total income for a given reg number', async function () {
     const taxiTrips = TaxiTrips(pool);
-    assert.deepStrictEqual(0, taxiTrips.findIncomeByRegNumber('...').length);
-    assert.deepStrictEqual(0, taxiTrips.findIncomeByRegNumber('***').length);
+    assert.equal(80, await taxiTrips.findIncomeByRegNumber('DB12345'));
+    assert.equal(115, await taxiTrips.findIncomeByRegNumber('CA19785'));
   });
 
   it('find the total income for each taxi', async function () {
     const taxiTrips = TaxiTrips(pool);
-    assert.deepStrictEqual([{}, {}, {}], taxiTrips.findTotalIncomePerTaxi());
+    assert.deepEqual(
+      [
+        {
+          reg_number: 'CA19785',
+          income: 115,
+        },
+        {
+          reg_number: 'DB12345',
+          income: 80,
+        },
+        {
+          reg_number: 'GP32456',
+          income: 30,
+        },
+      ],
+      await taxiTrips.findTotalIncomePerTaxi()
+    );
   });
 
   it('find the total income for all the taxis', async function () {
     const taxiTrips = TaxiTrips(pool);
-    assert.deepStrictEqual(0.0, taxiTrips.findTotalIncome());
+    assert.equal(225, await taxiTrips.findTotalIncome());
   });
 
   after(function () {
