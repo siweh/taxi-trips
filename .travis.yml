@@ -9,6 +9,7 @@ env:
 before_script:
   - psql -c 'create database taxi_trips;' -U postgres
   - psql -U postgres -d taxi_trips -a -f tables.sql
+  - psql -U postgres -d taxi_trips -a -f data.sql
 
 services: 
   - postgresql
