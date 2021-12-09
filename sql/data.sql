@@ -51,3 +51,8 @@ insert into trips(taxi_id, route_id) values(5, 1);
 -- join trips on trips.route_id = routes.id
 -- join taxi on taxi.id = trips.taxi_id
 -- group by taxi.reg_number
+
+-- select sum(fare) as total_income from routes 
+-- join trips on trips.route_id = routes.id 
+-- join taxi on taxi.id = trips.taxi_id 
+-- group by taxi.region_id;
